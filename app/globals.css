@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+.container {
+  @apply w-full md:w-[90%] lg:w-[85%] xl:w-[82.5%] max-w-[1400px] mx-auto p-2 md:p-0;
+}
+
+.toast-success {
+  @apply bg-green-600/20 text-green-600;
+}
