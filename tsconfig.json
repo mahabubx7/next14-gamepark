@@ -18,6 +18,11 @@
       }
     ],
     "paths": {
+      "$app/*": ["./app/*"],
+      "$component/*": ["./components/*"],
+      "$helpers/*": ["./helpers/*"],
+      "$service/*": ["./services/*"],
+      "$service": ["./services/index.ts"],
       "$/*": ["./*"]
     }
   },

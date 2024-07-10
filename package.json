@@ -2,25 +2,50 @@
   "name": "gmp",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "drz": "drizzle-kit",
+    "drz:reset": "rimraf -d ./db/drizzle && drizzle-kit generate && drizzle-kit push && yarn db:seed",
+    "db:seed": "node --loader ts-node/esm --experimental-specifier-resolution=node ./db/seeders/index.ts"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.4.1",
+    "@internationalized/date": "^3.5.4",
+    "@nextui-org/react": "^2.4.2",
+    "@stripe/stripe-js": "^4.1.0",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.2",
+    "framer-motion": "^11.2.12",
+    "micro-cors": "^0.1.1",
+    "next": "14.2.4",
+    "next-auth": "^5.0.0-beta.19",
+    "pg": "^8.12.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "stripe": "^16.2.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/dotenv": "^8.2.0",
+    "@types/micro-cors": "^0.1.5",
     "@types/node": "^20",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "drizzle-kit": "^0.22.7",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "eslint-config-next": "14.2.4",
+    "postcss": "^8",
+    "rimraff": "^0.0.1-security",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }
