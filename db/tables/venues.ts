@@ -1,4 +1,5 @@
 import { boolean, index, json, pgTable, text } from "drizzle-orm/pg-core";
+import vendors from "./vendors";
 
 export const spaceTypes = ["indoor", "outdoor"] as const;
 export const gameTypes = ["1v1", "2v2", "4v4", "11v11", "custom"] as const;
@@ -33,7 +34,9 @@ const venues = pgTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-
+    ownerId: text("owner_id")
+      .notNull()
+      .references(() => vendors.id, { onDelete: "no action" }),
     name: text("name").notNull().unique(),
     city: text("city").notNull(),
     address: text("address"),

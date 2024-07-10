@@ -1,5 +1,5 @@
 import { auth } from "$/auth";
-import { SignIn } from "$/components/auth/sign-in";
+import { SignIn, SignInWithGoogle } from "$/components/auth/sign-in";
 import { SignOut } from "$/components/auth/sign-out";
 import Image from "next/image";
 
@@ -8,8 +8,11 @@ export default async function LoginPage() {
 
   if (!session?.user) {
     return (
-      <div>
-        <h1>Sign in</h1>
+      <div className="max-w-sm mx-auto my-4">
+        <div className="flex items-center mx-auto w-full gap-2 justify-center">
+          <SignInWithGoogle />
+        </div>
+        <hr />
         <SignIn />
       </div>
     );
@@ -19,12 +22,14 @@ export default async function LoginPage() {
     <div>
       <div>
         <h1>Welcome, {session.user.email}</h1>
-        <Image
-          width={64}
-          height={64}
-          src={session.user!.image!}
-          alt={session.user!.name!}
-        />
+        {session.user.image && (
+          <Image
+            width={64}
+            height={64}
+            src={session.user?.image!}
+            alt={session.user?.name!}
+          />
+        )}
       </div>
       <SignOut />
       <div>

@@ -37,7 +37,7 @@ export default function DashboardLayout({
 
       <Sidebar />
 
-      <main className="min-h-[80vh] dark text-foreground bg-background">
+      <main className="min-h-[80vh] dark text-foreground bg-background p-2 md:p-0">
         <WithAuth>{children}</WithAuth>
       </main>
     </>
