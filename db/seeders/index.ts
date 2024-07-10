@@ -1,11 +1,11 @@
 import { gamesSeeder } from "./games";
-import { venuesSeeder } from "./venues";
+import { userAndVendorWithVenuesSeeder } from "./users_and_vendors";
 
 async function executeAllSeeders() {
   // Add more seeders here
   try {
     await gamesSeeder(); // <-- Run the games-seeder function
-    await venuesSeeder(); // <-- Run the venues-seeder function
+    await userAndVendorWithVenuesSeeder(); // <-- Run the users - vendors - venues seeder function
   } catch (err) {
     throw err;
   }

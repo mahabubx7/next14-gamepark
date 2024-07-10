@@ -8,6 +8,8 @@ const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  password: text("password"),
+  role: text("role").$type<"user" | "vendor" | "admin">().default("user"),
 });
 
 export default users;

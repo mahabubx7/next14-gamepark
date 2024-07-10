@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS "tickets" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
 	"booking_ids" text[] DEFAULT ARRAY[]::text[] NOT NULL,
-	"booked_at" date DEFAULT '7/7/2024',
+	"booked_at" date DEFAULT '7/10/2024',
 	"booked_for" date NOT NULL,
 	"code" text NOT NULL,
 	"tokens" json NOT NULL,
@@ -78,11 +78,25 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"name" text,
 	"email" text NOT NULL,
 	"emailVerified" timestamp,
-	"image" text
+	"image" text,
+	"password" text,
+	"role" text DEFAULT 'user'
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "vendors" (
+	"id" text PRIMARY KEY NOT NULL,
+	"user_id" text NOT NULL,
+	"phone" text,
+	"address" json NOT NULL,
+	"city" text NOT NULL,
+	"country" text NOT NULL,
+	"games" text[] NOT NULL,
+	"approved" boolean DEFAULT false NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "venues" (
 	"id" text PRIMARY KEY NOT NULL,
+	"owner_id" text NOT NULL,
 	"name" text NOT NULL,
 	"city" text NOT NULL,
 	"address" text,
@@ -133,6 +147,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "tickets" ADD CONSTRAINT "tickets_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "venues" ADD CONSTRAINT "venues_owner_id_vendors_id_fk" FOREIGN KEY ("owner_id") REFERENCES "public"."vendors"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
