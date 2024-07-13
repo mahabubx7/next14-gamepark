@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // poweredByHeader: false,
+  poweredByHeader: false,
+
   images: {
-    // remotePatterns: ["lh3.googleusercontent.com", "i.ibb.co"],
     remotePatterns: [
       {
         protocol: "https",
@@ -24,31 +24,29 @@ const nextConfig = {
       },
     ],
   },
-  // CORS
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       headers: [
-  //         { key: "Access-Control-Allow-Credentials", value: "true" },
-  //         {
-  //           key: "Access-Control-Allow-Origin",
-  //           // value: "https://gamepark.lcl.host:44333",
-  //           value: "*",
-  //         },
-  //         {
-  //           key: "Access-Control-Allow-Methods",
-  //           value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-  //         },
-  //         {
-  //           key: "Access-Control-Allow-Headers",
-  //           value:
-  //             "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
+
+  // Allow CORS from anywhere
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,POST,HEAD,PUT,DELETE,PATCH",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "X-Requested-With, Content-Type, Accept",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
