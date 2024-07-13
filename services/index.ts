@@ -1,8 +1,14 @@
+import "dotenv/config";
 import toast from "react-hot-toast";
 
-const API_URL = `${
-  process.env.ORIGIN ? process.env.ORIGIN! : "http://localhost:3000"
-}/api`;
+const API_URL = () => {
+  if (process.env.ORIGIN) {
+    return `${process.env.ORIGIN}/api`;
+  }
+  return "http://0.0.0.0:3000/api";
+};
+
+// console.log("API_URL => ", API_URL);
 
 /**
  * Fetch data from the API
@@ -14,7 +20,7 @@ export async function get<T = any>(
   url: string,
   options: Record<string, any> = {}
 ) {
-  const res = await fetch(API_URL + url, {
+  const res = await fetch(API_URL() + url, {
     headers: {
       "Content-Type": "application/json",
     }, // default headers
@@ -50,7 +56,7 @@ export async function post<T = any>(
   options: Record<string, any> = {},
   origin?: string
 ) {
-  const res = await fetch(`${origin ? origin + "/api" : API_URL}${url}`, {
+  const res = await fetch(`${origin ? origin + "/api" : API_URL()}${url}`, {
     method: "POST",
     credentials: "include",
     headers: {
