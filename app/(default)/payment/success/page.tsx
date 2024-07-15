@@ -1,4 +1,5 @@
 import db, { tickets } from "$/db";
+import { SuccessMessage } from "$component/payment/success";
 import { eq } from "drizzle-orm";
 
 async function updatePaymentInfo(ticketIDs: string[], sessionId: string) {
@@ -29,14 +30,6 @@ export default async function PaymentSuccess({ searchParams }: any) {
     ? query.get("ticket")!.split(",")
     : [];
 
-  if (sessionId && tickets.length > 0) {
-    // Update the payment info
-    await updatePaymentInfo(tickets, sessionId!).catch((err) => {
-      console.error(err);
-      throw err; // throw the error
-    });
-  }
-
   if (!sessionId || tickets.length === 0) {
     return (
       <div className="mx-auto mt-12 w-full max-w-screen-md bg-red-500/30 text-red-600 p-2 rounded">
@@ -46,14 +39,13 @@ export default async function PaymentSuccess({ searchParams }: any) {
     );
   }
 
-  return (
-    <div className="mx-auto mt-12 w-full max-w-screen-md bg-green-500/30 text-green-600 p-2 rounded">
-      <h1 className="my-2 text-xl font-bold">Payment Accepted!</h1>
-      <p>Thanks for your booking!</p>
-      <small>{sessionId}</small>
-      <p>
-        <small>{tickets}</small>
-      </p>
-    </div>
-  );
+  if (sessionId && tickets.length > 0) {
+    // Update the payment info
+    await updatePaymentInfo(tickets, sessionId!).catch((err) => {
+      console.error(err);
+      throw err; // throw the error
+    });
+  }
+
+  return <SuccessMessage tickets={tickets} sessionId={sessionId} />;
 }

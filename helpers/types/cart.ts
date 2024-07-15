@@ -14,4 +14,5 @@ export type CartStore = {
   totalPrice: number;
   addToCart: (item: Cart) => void;
   removeFromCart: (index: number) => void;
+  clearCart: () => void;
 };

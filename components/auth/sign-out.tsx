@@ -1,6 +1,15 @@
 import { signOut } from "$/auth";
+import { Button } from "@nextui-org/react";
 
-export function SignOut() {
+interface SignOutProps {
+  raw: boolean;
+}
+
+export function SignOut(
+  props: SignOutProps = {
+    raw: false,
+  }
+) {
   return (
     <form
       action={async () => {
@@ -8,7 +17,13 @@ export function SignOut() {
         await signOut();
       }}
     >
-      <button type="submit">Sign Out</button>
+      {props.raw ? (
+        <button type="submit">Sign Out</button>
+      ) : (
+        <Button size="sm" type="submit">
+          Sign Out
+        </Button>
+      )}
     </form>
   );
 }

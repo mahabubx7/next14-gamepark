@@ -1,6 +1,6 @@
 import { auth } from "$/auth";
-import { Header } from "$/components/header";
 import { NotifyForbidden } from "$component/auth/notify/forbidden";
+import { DHeader } from "$component/dashboard/header";
 import { Sidebar } from "$component/dashboard/sidebar";
 import type { Metadata } from "next";
 import "../globals.css";
@@ -33,12 +33,15 @@ export default function DashboardLayout({
 }>) {
   return (
     <>
-      <Header />
+      <main className="w-full p-0 mx-auto flex-1 relative flex gap-0 h-screen">
+        <Sidebar />
 
-      <Sidebar />
-
-      <main className="min-h-[80vh] dark text-foreground bg-background p-2 md:p-0">
-        <WithAuth>{children}</WithAuth>
+        <div className="w-full min-h-[80vh] dark text-foreground bg-background p-2 md:p-0">
+          <DHeader />
+          <div className="w-full py-2.5 px-2">
+            <WithAuth>{children}</WithAuth>
+          </div>
+        </div>
       </main>
     </>
   );

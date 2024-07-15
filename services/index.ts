@@ -5,7 +5,7 @@ const API_URL = () => {
   if (process.env.ORIGIN) {
     return `${process.env.ORIGIN}/api`;
   }
-  return "http://0.0.0.0:3000/api";
+  return "http://localhost:3000/api";
 };
 
 // console.log("API_URL => ", API_URL);

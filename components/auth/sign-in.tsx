@@ -3,8 +3,6 @@ import { Button, Input } from "@nextui-org/react";
 import { SlEnvolope, SlLock } from "react-icons/sl";
 
 export async function SignIn() {
-  "use server";
-
   return (
     <form
       className="flex flex-col gap-2 my-4"

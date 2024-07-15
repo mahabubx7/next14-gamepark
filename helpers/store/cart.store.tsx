@@ -4,7 +4,7 @@ import { ReactNode, createContext, useContext } from "react";
 import { StoreApi, UseBoundStore, create } from "zustand";
 import { PersistOptions, persist } from "zustand/middleware";
 
-type CartState = Omit<CartStore, "addToCart" | "removeFromCart">;
+type CartState = Omit<CartStore, "addToCart" | "removeFromCart" | "clearCart">;
 
 const initialState: CartState = {
   items: [],
@@ -34,6 +34,13 @@ const createCartStore = () => {
               items,
               totalPrice: state.totalPrice - removed.price,
             };
+          });
+        },
+
+        // Action: Clear the cart
+        clearCart: () => {
+          set(() => {
+            return initialState;
           });
         },
       }),

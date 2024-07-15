@@ -32,7 +32,7 @@ export async function Header() {
                 <li>
                   <span className="inline-flex gap-x-2 justify-end">
                     <span className="text-indigo-500">{session.user.name}</span>
-                    <SignOut />
+                    <SignOut raw={true} />
                   </span>
                 </li>
               </>
